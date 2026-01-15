@@ -34,7 +34,7 @@ const App = () => {
             }
 
             const result = await response.json();
-            setProducts(result.slice(3,7));
+            setProducts(result.slice(0,4));
             setLoading(false);
         } catch (error) {
             console.error(error.message);
