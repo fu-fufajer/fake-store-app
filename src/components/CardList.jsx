@@ -8,7 +8,7 @@ const CardList = ({data, type, children}) => {
             {children}
             <div className="grid grid-cols-4 gap-4">
                 {
-                    data.map((item, index) => type == 'category' ? (<CardComp key={index}/>) : (<CardCommerce key={index}/>))
+                    data.map((item, index) => type == 'category' ? (<CardComp key={index} item={item}/>) : (<CardCommerce key={index} item={item}/>))
                 }
             </div>
         </div>
