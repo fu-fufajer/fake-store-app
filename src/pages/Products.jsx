@@ -9,6 +9,12 @@ const Products = () => {
     const [products, setProducts] = useState({});
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("")
+    const [currentPage, setCurrentPage] = useState(1);
+    const onPageChange = (page) => {
+        setCurrentPage(page)
+        // tidak mengirim param url, karena udah di url = function sudah ada currentPage dari set
+        getProducts();
+    };
 
     function processSearch(event) {
         setSearch(event.target.value);
@@ -17,7 +23,7 @@ const Products = () => {
         getProducts(url);
     }
 
-    async function getProducts(url = "https://api.escuelajs.co/api/v1/products") {
+    async function getProducts(url = "https://api.escuelajs.co/api/v1/products" + "?limit=8" + "&offset=" + currentPage) {
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -52,22 +58,22 @@ const Products = () => {
     }, []);
 
     return (
-        <div>
-            <div className='justify-center'>
+        <div className='flex flex-col justify-center items-center'>
+            <div>
                 <h1 className="text-2xl font-bold mt-8">Daftar Produk</h1>
                 <div className="flex mt-3 mb-5 gap-3">
                     <SearchComp processSearch={processSearch} />
                     <DropdownComp processSort={processSort} />
                 </div>
+
             </div>
             {
                 loading ? (<div className="flex justify-center mt-96">
                     <Spinner aria-label="Default status example" size="xl" />
                 </div>) : (<CardList data={products} type="product"></CardList>)
             }
-
             <div className="mt-5 mb-5">
-                <PaginationComp/>
+                <PaginationComp currentPage={currentPage} onPageChange={onPageChange}/>
             </div>
         </div>
     )
