@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import CardList from '../components/CardList';
 import { Spinner } from 'flowbite-react';
-import SearchComp from '../components/SearchComp';
+import React, { useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom';
+import CardList from '../components/CardList';
 
-const Products = () => {
-    const [products, setProducts] = useState({});
+const ProductCategory = () => {
+    const { categoryId } = useParams();
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 
     async function getProducts() {
-        const url = "https://api.escuelajs.co/api/v1/products";
+        const url = "https://api.escuelajs.co/api/v1/products/?categoryId=" + categoryId;
         try {
             const response = await fetch(url);
             if (!response.ok) {
@@ -17,7 +18,7 @@ const Products = () => {
 
             const result = await response.json();
             setProducts(result);
-            setLoading(false)
+            setLoading(false);
         } catch (error) {
             console.error(error.message);
         }
@@ -29,22 +30,18 @@ const Products = () => {
 
     if (loading) {
         return (
-            <div className="flex justify-center mt-96">
-                <Spinner aria-label="Default status example" size="xl" />
+            <div className="flex justify-center">
+                <Spinner aria-label='Default status example' />
             </div>
         )
     }
 
     return (
-        <div>
-            <div className="flex mt-5 mb-5">
-                <SearchComp />
-            </div>
-            <CardList data={products} type="product">
-                <h1 className="text-2xl font-bold mb-8 mt-8">Daftar Produk</h1>
-            </CardList>
+        <div className='text-center mb-5 mt-8'>
+            <h1 className='text-2xl font-bold mb-8'>Produk Kategori {products[0].category.name}</h1>
+            <CardList data={products} type='product' />
         </div>
     )
 }
 
-export default Products
+export default ProductCategory
