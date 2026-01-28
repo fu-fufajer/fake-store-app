@@ -19,17 +19,14 @@ const ProductCategory = () => {
     };
 
     function processSearch(event) {
-        setSearch(event.target.value);
-        let url = "https://api.escuelajs.co/api/v1/products" + "?title=" + search;
+        const value = event.target.value;
+        setSearch(value);
+        let url = `https://api.escuelajs.co/api/v1/products?title=${value}&limit=8&offset=${currentPage}`;
         setLoading(true);
         getProducts(url);
     }
 
-    async function getProducts() {
-        const limit = 8;
-        const offset = (currentPage - 1) * limit;
-        const url = `https://api.escuelajs.co/api/v1/products?categoryId=${categoryId}&limit=${limit}&offset=${offset}`;
-
+    async function getProducts(url = `https://api.escuelajs.co/api/v1/products?limit=8&offset=${currentPage}`) {
         try {
             const response = await fetch(url);
             if (!response.ok) {

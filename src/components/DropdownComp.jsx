@@ -6,7 +6,7 @@ const DropdownComp = ({ processSort }) => {
         <div>
             <Dropdown label="Urutkan Data" dismissOnClick={false} color="alternative">
                 <DropdownItem onClick={() => processSort("harga termurah")}>Termurah</DropdownItem>
-                <DropdownItem onClick={() => processSort("harga termurah")}>Termahal</DropdownItem>
+                <DropdownItem onClick={() => processSort("harga termahal")}>Termahal</DropdownItem>
                 <DropdownItem onClick={() => processSort("a-z")}>A - Z</DropdownItem>
                 <DropdownItem onClick={() => processSort("z-a")}>Z - A</DropdownItem>
             </Dropdown>
