@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card } from "flowbite-react";
+import { Button, Card } from "flowbite-react";
 
-const CardCommerce = ({ item }) => {
+const CardCommerce = ({ item, updateSelected }) => {
     return (
         <Card
             className="max-w-sm"
@@ -60,12 +60,11 @@ const CardCommerce = ({ item }) => {
             </div>
             <div className="flex items-center justify-between">
                 <span className="text-xl font-bold text-gray-900 dark:text-white">Rp. {item.price}</span>
-                <a
-                    href="#"
+                <Button onClick={() => updateSelected(item)}
                     className="rounded-lg bg-cyan-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-cyan-800 focus:outline-none focus:ring-4 focus:ring-cyan-300 dark:bg-cyan-600 dark:hover:bg-cyan-700 dark:focus:ring-cyan-800"
                 >
                     Keranjang
-                </a>
+                </Button>
             </div>
         </Card>
     )
