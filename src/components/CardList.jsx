@@ -8,9 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const CardList = ({ data, type, children }) => {
     const [openModal, setOpenModal] = useState(false);
-    const { addToCart } = useContext(CartContext)
-
     const [selected, setSelected] = useState({})
+    const { addToCart } = useContext(CartContext)
 
     function updateSelected(item) {
         setSelected(item);
